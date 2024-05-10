@@ -6,9 +6,14 @@ type Props = React.PropsWithChildren<{
 }>
 
 export const Key = (props: Props) => {
-  return <Container style={{ flex: props.size }}>{props.children}</Container>
+  return (
+    <Container
+      className="transition-75 flex h-14 cursor-pointer items-center justify-center rounded bg-slate-300 font-extrabold uppercase text-black transition-all hover:bg-slate-400"
+      style={{ flex: props.size }}
+    >
+      {props.children}
+    </Container>
+  )
 }
 
-const Container = styled.div.attrs({
-  className: `bg-gray-200 hover:bg-gray-300 dark:bg-zinc-400 dark:text-white dark:hover:bg-zinc-500 h-12`
-})``
+const Container = styled.button.attrs({})``

@@ -3,10 +3,10 @@ import { IKeyActionType, KEYBOARD_ROWS } from './Keys'
 
 export const Keyboard = () => {
   return (
-    <div className="flex flex-col items-center w-full">
+    <div className="flex w-full max-w-[512px] flex-col items-center">
       {KEYBOARD_ROWS.map((row, rowIndex) => {
         return (
-          <div className="flex gap-1.5 my-0.5 w-full mb-1.5">
+          <div className="my-0.5 mb-1.5 flex w-full gap-1.5">
             <Spacer rowIndex={rowIndex} />
             {row.map((key) => (
               <Key
