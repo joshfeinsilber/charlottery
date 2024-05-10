@@ -1,8 +1,8 @@
-import { useState } from 'react'
 import { Keyboard } from './components/keyboard/Keyboard'
+import Layout from './layout/App'
 
 function App() {
-  const [count, setCount] = useState(0)
+  return <Layout />
 
   return (
     <div className="flex h-[100svh] w-[100svw] flex-col items-center justify-center bg-slate-100">
