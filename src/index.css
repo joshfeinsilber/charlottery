@@ -3,5 +3,6 @@
 @tailwind utilities;
 
 body {
-  font-family: 'Merriweather', serif !important;
+  font-family: 'Lexend Deca', sans-serif !important;
+  font-optical-sizing: auto;
 }
