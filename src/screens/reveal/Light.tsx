@@ -4,7 +4,7 @@ export const Light = (props: { enabled: boolean }) => {
   return (
     <div
       className={classNames(
-        'h-[40px] w-[40px] rounded-full transition-colors delay-200 duration-200',
+        'h-[40px] w-[40px] rounded-full transition-all delay-200 duration-500',
         {
           'bg-green-700': props.enabled,
           'bg-gray-900': !props.enabled
