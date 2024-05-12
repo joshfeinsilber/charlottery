@@ -1,4 +1,4 @@
-import { Logo } from '../../layout/header/Logo'
+import { Logo } from '../../components/Logo'
 
 export const Intro = () => (
   <div className="flex flex-col items-center text-center">
