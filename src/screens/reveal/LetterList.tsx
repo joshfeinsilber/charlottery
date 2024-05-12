@@ -2,25 +2,32 @@ import { useEffect, useState } from 'react'
 import { Letter } from '../../components/Letter'
 import { shuffle } from 'lodash'
 import { motion } from 'framer-motion'
+import { LETTERS } from '../../const/letters'
+import { lettersForToday } from '../../util/lottery/letters'
 
-const ALL_LETTERS = 'abcdefghijklmnopqrstuvwxyz'.split('')
-
-export const LetterList = () => {
-  const [letters, setLetters] = useState<string[]>(ALL_LETTERS)
+export const LetterList = (props: { revealLightCount: number }) => {
+  const [letters, setLetters] = useState<string[]>([...LETTERS])
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      const shuffled = shuffle(ALL_LETTERS)
-      setLetters(shuffled)
-    }, 2000)
-    return () => clearInterval(interval)
-  })
+    if (props.revealLightCount === 0) {
+      setLetters([...LETTERS])
+      return
+    }
+
+    if (props.revealLightCount >= 3) {
+      setLetters(lettersForToday())
+      return
+    }
+
+    const shuffledLetters = shuffle(lettersForToday())
+    setLetters(shuffledLetters)
+  }, [props.revealLightCount])
 
   return (
     <div className="flex max-w-2xl flex-wrap justify-center gap-3">
       {letters.map((letter) => {
         return (
-          <motion.div key={letter} layout transition={{ duration: 0.4, ease: 'anticipate' }}>
+          <motion.div key={letter} layout transition={{ duration: 1, ease: 'anticipate' }}>
             <Letter letter={letter} />
           </motion.div>
         )
