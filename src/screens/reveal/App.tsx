@@ -2,13 +2,19 @@ import { useEffect, useState } from 'react'
 import { LetterList } from './LetterList'
 import { Light } from './Light'
 import { motion } from 'framer-motion'
+import { useSetAtom } from 'jotai'
+import { Screen, screen } from '../../store/screen'
 
 export const Reveal = () => {
+  const setScreen = useSetAtom(screen)
   const [revealLightCount, setRevealLightCount] = useState(0)
 
   useEffect(() => {
     if (revealLightCount === 3) {
-      return
+      const timeout = setTimeout(() => {
+        setScreen(Screen.game)
+      }, 2700)
+      return () => clearTimeout(timeout)
     }
 
     // Wait a little longer for the first shuffle
@@ -19,7 +25,7 @@ export const Reveal = () => {
     }, duration)
 
     return () => clearTimeout(timeout)
-  }, [revealLightCount])
+  }, [revealLightCount, setScreen])
 
   return (
     <motion.div

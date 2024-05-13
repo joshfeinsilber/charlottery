@@ -1,8 +1,8 @@
-import { useAtom } from 'jotai'
+import { useAtom, useAtomValue } from 'jotai'
 import { Keyboard } from '../../components/keyboard/Keyboard'
 import { IKeyAction } from '../../components/keyboard/Keys'
 import { LetterQueue } from './LetterQueue'
-import { currentWord } from '../../store/game'
+import { currentStartLetterIndex, currentWord } from '../../store/game'
 import { Word } from './Word'
 import { useEffect, useState } from 'react'
 import { lettersForToday } from '../../util/lottery/letters'
@@ -10,12 +10,16 @@ import { handleSubmit } from '../../util/game/handleSubmit'
 
 export const Game = () => {
   const [word, setWord] = useAtom(currentWord)
+  const startLetterIndex = useAtomValue(currentStartLetterIndex)
+
   const [loading, setLoading] = useState(false)
 
   // When the game begins, set the first letter
   useEffect(() => {
-    setWord(lettersForToday()[0])
-  }, [])
+    if (!word) {
+      setWord(lettersForToday()[startLetterIndex])
+    }
+  }, [word, startLetterIndex])
 
   const submit = () => {
     if (loading) {

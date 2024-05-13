@@ -16,6 +16,9 @@ export const handleSubmit = async () => {
   const letters = lettersForToday()
   const currentLetterIndex = store.get(currentStartLetterIndex)
 
+  // Start by dismissing all toasts
+  toast.dismiss()
+
   // Word must be at least 3 characters long
   if (word.length < 3) {
     toast.error('Not enough letters')
