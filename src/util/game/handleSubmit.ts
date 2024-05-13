@@ -5,9 +5,10 @@ import { lettersForToday } from '../lottery/letters'
 import { getLettersWithPoints } from './getLettersWithPoints'
 import { toast } from 'sonner'
 import { SUCCESS_WORD_MESSAGES } from '../../const/messages'
+import { WORD_LIST } from '../../const/wordList'
 
 export const isWord = async (word: string) => {
-  return true
+  return WORD_LIST.has(word)
 }
 
 export const handleSubmit = async () => {
