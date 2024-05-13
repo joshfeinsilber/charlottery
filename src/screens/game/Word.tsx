@@ -1,30 +1,40 @@
 import { useAtomValue } from 'jotai'
-import { currentWord } from '../../store/game/word'
+import { currentStartLetterIndex, currentWord } from '../../store/game'
 import { motion } from 'framer-motion'
-import { Letter } from '../../components/Letter'
+import { ILetterStatus, Letter } from '../../components/Letter'
 import { useMeasure } from '@uidotdev/usehooks'
 import { useMemo } from 'react'
+import { lettersForToday } from '../../util/lottery/letters'
+import { getLetterIndexesWithPoints } from '../../util/game/getLettersWithPoints'
 
 const MAX_SIZE = 70
 
 export const Word = () => {
-  const word = useAtomValue(currentWord)
   const [ref, { width }] = useMeasure()
+  const word = useAtomValue(currentWord)
+  const startLetterIndex = useAtomValue(currentStartLetterIndex)
+  const letters = lettersForToday()
 
   const sizes = useMemo(() => {
     const containerWidth = width ?? 0
 
-    let size = MAX_SIZE
+    let text = MAX_SIZE
     let gap = 8
 
-    const totalSize = word.length * size + (word.length - 1) * gap
+    const totalSize = word.length * text + (word.length - 1) * gap
 
     if (totalSize > containerWidth) {
       gap = 4
-      size = (containerWidth - (word.length - 1) * gap) / word.length
+      text = (containerWidth - (word.length - 1) * gap) / word.length
     }
-    return { size, gap }
+    return { text, gap }
   }, [width, word.length])
+
+  const letterIndexesWithPoints = getLetterIndexesWithPoints({
+    letters,
+    currentStartLetterIndex: startLetterIndex,
+    currentWord: word
+  })
 
   return (
     <div
@@ -38,7 +48,13 @@ export const Word = () => {
           layout
           transition={{ duration: 0.15, ease: 'easeOut' }}
         >
-          <Letter letter={letter} size={sizes.size} />
+          <Letter
+            letter={letter}
+            size={sizes.text}
+            status={
+              letterIndexesWithPoints.includes(index) ? ILetterStatus.point : ILetterStatus.default
+            }
+          />
         </motion.div>
       ))}
     </div>

@@ -1,20 +1,40 @@
+import classNames from 'classnames'
 import { motion } from 'framer-motion'
+
+export enum ILetterStatus {
+  default = 'default',
+  point = 'point'
+}
 
 interface Props {
   size: number
   letter: string
+  status?: ILetterStatus
 }
 
 export const Letter = (props: Props) => {
+  const status = props.status || ILetterStatus.default
+
   return (
     <motion.div
       initial={{ scale: 0 }}
       animate={{ scale: 1 }}
       transition={{ duration: 0.15, ease: 'easeOut' }}
       style={{ width: props.size, height: props.size, fontSize: props.size / 3 }}
-      className={`flex items-center justify-center border-2 border-gray-400 bg-white font-semibold uppercase`}
     >
-      {props.letter}
+      <div
+        className={classNames(
+          `transition-color flex h-full w-full items-center justify-center border-2 font-semibold uppercase duration-500`,
+          {
+            'border-gray-400': status === ILetterStatus.default,
+            'border-green-600': status === ILetterStatus.point,
+            'bg-white': status === ILetterStatus.default,
+            'bg-green-100': status === ILetterStatus.point
+          }
+        )}
+      >
+        {props.letter}
+      </div>
     </motion.div>
   )
 }

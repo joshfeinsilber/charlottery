@@ -2,7 +2,7 @@ import { useAtom } from 'jotai'
 import { Keyboard } from '../../components/keyboard/Keyboard'
 import { IKeyAction } from '../../components/keyboard/Keys'
 import { LetterQueue } from './LetterQueue'
-import { currentWord } from '../../store/game/word'
+import { currentWord } from '../../store/game'
 import { Word } from './Word'
 
 export const Game = () => {
