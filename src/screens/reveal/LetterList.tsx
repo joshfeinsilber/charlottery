@@ -28,7 +28,7 @@ export const LetterList = (props: { revealLightCount: number }) => {
       {letters.map((letter) => {
         return (
           <motion.div key={letter} layout transition={{ duration: 1, ease: 'anticipate' }}>
-            <Letter letter={letter} />
+            <Letter size={80} letter={letter} />
           </motion.div>
         )
       })}
