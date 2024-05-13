@@ -16,10 +16,8 @@ export const Game = () => {
 
   // When the game begins, set the first letter
   useEffect(() => {
-    if (!word) {
-      setWord(lettersForToday()[startLetterIndex])
-    }
-  }, [word, startLetterIndex])
+    setWord(lettersForToday()[startLetterIndex])
+  }, [startLetterIndex])
 
   const submit = () => {
     if (loading) {

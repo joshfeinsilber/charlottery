@@ -45,7 +45,9 @@ export const handleSubmit = async () => {
   }
 
   // Add to our list of words
-  store.set(words, [...store.get(words), word])
+  store.set(words, (prev) => {
+    return [...prev, word]
+  })
 
   const lastLetterIndex = letters.indexOf(lastLetterWithPoint)
   if (lastLetterIndex !== -1) {
@@ -56,13 +58,15 @@ export const handleSubmit = async () => {
   if (!nextLetter) {
     store.set(screen, Screen.results)
     // Push to our result history
-    store.set(resultHistory, [
-      ...store.get(resultHistory),
-      {
-        puzzleNum: PUZZLE_NUMBER,
-        wordsUsed: store.get(words).length
-      }
-    ])
+    store.set(resultHistory, (prev) => {
+      return [
+        ...prev,
+        {
+          puzzleNum: PUZZLE_NUMBER,
+          wordsUsed: store.get(words).length
+        }
+      ]
+    })
 
     return
   }

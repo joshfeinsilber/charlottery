@@ -4,7 +4,7 @@ import { atomWithStorage } from 'jotai/utils'
 const getKey = (key: string) => `seed-${seed}-${key}`
 
 export const atomWithSeedStorage = <T = any>(key: string, initialValue: T) => {
-  return atomWithStorage(getKey(key), initialValue)
+  return atomWithStorage(getKey(key), initialValue, undefined, { getOnInit: true })
 }
 
 export const removeOldLocalStorageData = () => {
