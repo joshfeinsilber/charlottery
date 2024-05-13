@@ -7,7 +7,7 @@ import { toast } from 'sonner'
 const colors = ['🟦', '🟧', '🟪', '🟨', '🟩', '🟫', '⬜']
 
 const resultText = () => {
-  const wordsUsed: string[] = store.get(words)
+  const wordsUsed = store.get(words)
 
   let text = `🎰 Charlottery No. ${PUZZLE_NUMBER}
 ✅ Completed in ${wordsUsed.length} words

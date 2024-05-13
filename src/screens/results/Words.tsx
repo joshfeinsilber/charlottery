@@ -2,7 +2,7 @@ import { useAtomValue } from 'jotai'
 import { words } from '../../store/game'
 
 export const Words = () => {
-  const wordsUsed = useAtomValue(words)
+  const wordsUsed: string[] = useAtomValue(words)
 
   return (
     <div className="card mt-4 w-full bg-base-100 text-center shadow-xl">

@@ -1,4 +1,4 @@
-import { atomWithLocalStorage } from '../util/storage/atomWithSeedStorage'
+import { atomWithSeedStorage } from '../util/storage/atomWithSeedStorage'
 
 export enum Screen {
   intro = 'intro',
@@ -7,4 +7,4 @@ export enum Screen {
   results = 'results'
 }
 
-export const screen = atomWithLocalStorage('screen', Screen.intro)
+export const screen = atomWithSeedStorage('screen', Screen.intro)
