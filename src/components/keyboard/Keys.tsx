@@ -12,11 +12,6 @@ export interface IKeyAction {
 export interface IKey {
   content: string | React.ReactNode
   action: IKeyAction
-  color?: {
-    bg?: string
-    activeBg?: string
-    text?: string
-  }
 }
 
 const FIRST_ROW: IKey[] = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'].map((letter) => ({
@@ -30,12 +25,7 @@ const SECOND_ROW: IKey[] = ['a', 's', 'd', 'f', 'g', 'h', 'j', 'k', 'l'].map((le
 const THIRD_ROW: IKey[] = [
   {
     content: <span className="text-[0.75em] font-bold">ENTER</span>,
-    action: { type: IKeyActionType.submit },
-    color: {
-      bg: 'green-600',
-      activeBg: 'green-700',
-      text: 'white'
-    }
+    action: { type: IKeyActionType.submit }
   },
   ...['z', 'x', 'c', 'v', 'b', 'n', 'm'].map((letter) => ({
     content: letter,

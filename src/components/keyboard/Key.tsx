@@ -4,6 +4,7 @@ import styled from 'styled-components'
 
 type Props = React.PropsWithChildren<{
   size: number
+  submit?: boolean
   color?: {
     bg?: string
     activeBg?: string
@@ -16,14 +17,15 @@ export const Key = (props: Props) => {
   return (
     <Container
       className={classNames(
-        `transition-75 flex h-14 cursor-pointer items-center justify-center rounded  font-semibold uppercase  transition-all `,
+        `transition-75 flex h-14 cursor-pointer items-center justify-center rounded font-semibold uppercase transition-all`,
         {
-          [`bg-${props.color?.bg}`]: props.color?.bg,
-          [`active:bg-${props.color?.activeBg}`]: props.color?.activeBg,
-          [`text-${props.color?.text}`]: props.color?.text,
-          [`text-black`]: !props.color?.text,
-          [`bg-slate-300`]: !props.color?.bg,
-          [`active:bg-slate-400`]: !props.color?.activeBg
+          'text-black': !props.submit,
+          'bg-slate-300': !props.submit,
+          'active:bg-slate-400': !props.submit,
+
+          'text-white': props.submit,
+          'bg-green-600': props.submit,
+          'active:bg-green-700': props.submit
         }
       )}
       style={{ flex: props.size }}
