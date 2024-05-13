@@ -44,7 +44,12 @@ export const Keyboard = (props: Props) => {
               <Key
                 key={'key-' + (key.action.value ?? key.action.type)}
                 size={key.action.type !== IKeyActionType.letter ? 1.5 : 1}
-                onClick={() => props.onKeyPress?.(key.action)}
+                className={key.className}
+                onClick={() => {
+                  props.onKeyPress?.(key.action)
+                  // @ts-ignore
+                  document.activeElement?.blur() // Blur focus on the button after clicking so that if we use the Enter key, it doesn't trigger the button again
+                }}
               >
                 {key.content}
               </Key>
