@@ -13,7 +13,7 @@ export const removeOldLocalStorageData = () => {
 
   // If the key does not start with today's seed, remove it
   keys.forEach((key) => {
-    if (key.startsWith('seed') && !key.startsWith(seed)) {
+    if (key.startsWith('seed-') && !key.startsWith(`seed-${seed}`)) {
       localStorage.removeItem(key)
     }
   })

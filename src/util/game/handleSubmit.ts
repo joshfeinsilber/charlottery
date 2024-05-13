@@ -1,5 +1,5 @@
 import { last, sample } from 'lodash'
-import { currentStartLetterIndex, currentWord, words } from '../../store/game'
+import { currentStartLetterIndex, currentWord, resultHistory, words } from '../../store/game'
 import { store } from '../../store/store'
 import { lettersForToday } from '../lottery/letters'
 import { getLettersWithPoints } from './getLettersWithPoints'
@@ -7,6 +7,7 @@ import { toast } from 'sonner'
 import { SUCCESS_WORD_MESSAGES } from '../../const/messages'
 import { WORD_LIST } from '../../const/wordList'
 import { Screen, screen } from '../../store/screen'
+import { PUZZLE_NUMBER } from '../../const/puzzleNumber'
 
 export const isWord = async (word: string) => {
   return WORD_LIST.has(word)
@@ -54,6 +55,15 @@ export const handleSubmit = async () => {
   const nextLetter = letters[lastLetterIndex + 1]
   if (!nextLetter) {
     store.set(screen, Screen.results)
+    // Push to our result history
+    store.set(resultHistory, [
+      ...store.get(resultHistory),
+      {
+        puzzleNum: PUZZLE_NUMBER,
+        wordsUsed: store.get(words).length
+      }
+    ])
+
     return
   }
 
