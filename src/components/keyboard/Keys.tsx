@@ -4,12 +4,14 @@ export enum IKeyActionType {
   submit = 'submit'
 }
 
+export interface IKeyAction {
+  type: IKeyActionType
+  value?: string
+}
+
 export interface IKey {
   content: string | React.ReactNode
-  action: {
-    type: IKeyActionType
-    value?: string
-  }
+  action: IKeyAction
 }
 
 const FIRST_ROW: IKey[] = ['q', 'w', 'e', 'r', 't', 'y', 'u', 'i', 'o', 'p'].map((letter) => ({

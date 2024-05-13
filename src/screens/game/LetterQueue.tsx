@@ -3,11 +3,11 @@ import { lettersForToday } from '../../util/lottery/letters'
 
 export const LetterQueue = () => {
   return (
-    <div className="flex gap-2 overflow-visible">
+    <div className="flex w-full max-w-[512px] gap-1 overflow-x-scroll">
       {lettersForToday().map((letter) => {
         return (
-          <div className="shrink-0">
-            <Letter size={70} key={letter} letter={letter} />
+          <div className="shrink-0" key={'queue' + letter}>
+            <Letter size={50} letter={letter} />
           </div>
         )
       })}

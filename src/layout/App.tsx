@@ -5,7 +5,7 @@ import { Header } from './header/App'
 
 const Layout = () => {
   return (
-    <div className="min-w-svw flex min-h-svh flex-col overflow-hidden bg-slate-100 text-slate-900">
+    <div className="min-w-svw flex min-h-svh select-none flex-col overflow-hidden bg-slate-100 text-slate-900">
       <Header />
       <main className="flex flex-1 flex-col items-center justify-center p-4 sm:p-12">
         <Game />
