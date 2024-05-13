@@ -22,7 +22,14 @@ export const Intro = () => {
         <Logo />
       </h2>
       <p className="mt-4 text-xl italic">Build words with every character in the alphabet.</p>
-      <button className="btn btn-secondary btn-block mt-7">How To Play</button>
+      <button
+        className="btn btn-secondary btn-block mt-7"
+        onClick={() => {
+          ;(document.getElementById('tutorial') as HTMLDialogElement)?.showModal()
+        }}
+      >
+        How To Play
+      </button>
       <button
         className="btn btn-primary btn-lg btn-block mt-2"
         onClick={() => {

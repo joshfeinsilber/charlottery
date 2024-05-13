@@ -7,7 +7,12 @@ export const Header = () => {
         <Logo />
       </h2>
       <div className="tooltip tooltip-left" data-tip="How To Play">
-        <button className="btn btn-circle btn-ghost">
+        <button
+          className="btn btn-circle btn-ghost"
+          onClick={() => {
+            ;(document.getElementById('tutorial') as HTMLDialogElement)?.showModal()
+          }}
+        >
           <svg
             xmlns="http://www.w3.org/2000/svg"
             fill="none"
