@@ -7,6 +7,7 @@ import { Word } from './Word'
 import { useEffect, useState } from 'react'
 import { lettersForToday } from '../../util/lottery/letters'
 import { handleSubmit } from '../../util/game/handleSubmit'
+import { motion } from 'framer-motion'
 
 export const Game = () => {
   const [word, setWord] = useAtom(currentWord)
@@ -14,9 +15,12 @@ export const Game = () => {
 
   const [loading, setLoading] = useState(false)
 
-  // When the game begins, set the first letter
+  // When the start letter index changes, set the first letter of the word
   useEffect(() => {
-    setWord(lettersForToday()[startLetterIndex])
+    const letter = lettersForToday()[startLetterIndex]
+    if (letter) {
+      setWord(letter)
+    }
   }, [startLetterIndex])
 
   const submit = () => {
@@ -44,7 +48,12 @@ export const Game = () => {
   }
 
   return (
-    <div className="flex w-full flex-1 flex-col items-center">
+    <motion.div
+      className="flex w-full flex-1 flex-col items-center"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="flex w-full flex-1 items-center justify-center">
         <Word />
       </div>
@@ -54,6 +63,6 @@ export const Game = () => {
       <div className="mt-4 flex w-full items-end justify-center">
         <Keyboard onKeyPress={onKeyPress} />
       </div>
-    </div>
+    </motion.div>
   )
 }

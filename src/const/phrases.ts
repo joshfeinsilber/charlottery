@@ -15,14 +15,13 @@ export const NAMES = [
   'Finn',
   'Mebaa',
   'Clara',
+  "Ma'ano",
   'Monster Hunter',
   'Garlic Crush',
   'The White Fluffy Dog Down The Street',
   'Mid-Field Crisis',
-  "Ma'ano"
+  'Domino'
 ]
-
-export const ADJECTIVES = ['Alcohol-Free', 'Chocolatey', 'Raw', 'Green', 'Red', 'Purple', 'Exotic']
 
 export const NOUNS = [
   'Snack Overflow',
@@ -34,5 +33,13 @@ export const NOUNS = [
   'Knit Night',
   'Trivia Night',
   'Hot Tub Boats',
-  'Pickleball Paddle'
+  'Pickleball Paddle',
+  'Antler',
+  'Cottage Cheese On Pickles',
+  'Bouldering Project',
+  'Thin Crust Pepperoni Pizza',
+  'Pacific Rim',
+  'Puppuccino',
+  'Fried Chicken Sandwich',
+  'Chili'
 ]

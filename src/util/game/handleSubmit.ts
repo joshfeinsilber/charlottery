@@ -72,7 +72,4 @@ export const handleSubmit = async () => {
   }
 
   toast.success(sample(SUCCESS_WORD_MESSAGES))
-
-  // Setup the next word's first letter
-  store.set(currentWord, nextLetter)
 }
