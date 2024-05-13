@@ -4,16 +4,27 @@ import { IKeyAction } from '../../components/keyboard/Keys'
 import { LetterQueue } from './LetterQueue'
 import { currentWord } from '../../store/game'
 import { Word } from './Word'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 import { lettersForToday } from '../../util/lottery/letters'
+import { handleSubmit } from '../../util/game/handleSubmit'
 
 export const Game = () => {
   const [word, setWord] = useAtom(currentWord)
+  const [loading, setLoading] = useState(false)
 
   // When the game begins, set the first letter
   useEffect(() => {
     setWord(lettersForToday()[0])
   }, [])
+
+  const submit = () => {
+    if (loading) {
+      return
+    }
+    handleSubmit().finally(() => {
+      setLoading(false)
+    })
+  }
 
   const onKeyPress = (action: IKeyAction) => {
     if (action.type === 'letter') {
@@ -24,6 +35,9 @@ export const Game = () => {
         return
       }
       setWord(word.slice(0, -1))
+    } else if (action.type === 'submit') {
+      setLoading(true)
+      submit()
     }
   }
 

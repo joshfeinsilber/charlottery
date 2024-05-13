@@ -3,6 +3,7 @@ import { ILetterStatus, Letter } from '../../components/Letter'
 import { lettersForToday } from '../../util/lottery/letters'
 import { currentStartLetterIndex, currentWord } from '../../store/game'
 import { getLettersWithPoints } from '../../util/game/getLettersWithPoints'
+import { AnimatePresence, motion } from 'framer-motion'
 
 export const LetterQueue = () => {
   const word = useAtomValue(currentWord)
@@ -15,21 +16,27 @@ export const LetterQueue = () => {
     currentWord: word
   })
 
+  const filteredLetters = letters.filter((_, idx) => {
+    return idx >= startLetterIndex
+  })
+
   return (
-    <div className="flex w-full max-w-[512px] gap-1 overflow-x-scroll">
-      {letters.map((letter) => {
-        return (
-          <div className="shrink-0" key={'queue' + letter}>
-            <Letter
-              size={50}
-              letter={letter}
-              status={
-                lettersWithPoints.includes(letter) ? ILetterStatus.point : ILetterStatus.default
-              }
-            />
-          </div>
-        )
-      })}
-    </div>
+    <AnimatePresence>
+      <div className="flex w-full max-w-[512px] gap-1 overflow-x-scroll">
+        {filteredLetters.map((letter) => {
+          return (
+            <motion.div layout className="shrink-0" key={'queue' + letter}>
+              <Letter
+                size={50}
+                letter={letter}
+                status={
+                  lettersWithPoints.includes(letter) ? ILetterStatus.point : ILetterStatus.default
+                }
+              />
+            </motion.div>
+          )
+        })}
+      </div>
+    </AnimatePresence>
   )
 }
