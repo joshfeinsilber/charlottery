@@ -1,4 +1,3 @@
-import { useEffect } from 'react'
 import { Letter } from './Letter'
 
 const ExampleQueue = () => {

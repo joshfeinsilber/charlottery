@@ -5,7 +5,7 @@
   "type": "module",
   "scripts": {
     "dev": "bunx --bun vite",
-    "build": "tsc && vite build",
+    "build": "tsc && bunx --bun vite build",
     "preview": "vite preview",
     "format": "prettier --write \"src/**/*.+(ts|tsx|js|jsx)\"",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix"
