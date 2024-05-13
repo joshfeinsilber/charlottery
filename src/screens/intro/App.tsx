@@ -3,6 +3,7 @@ import { Logo } from '../../components/Logo'
 import { PUZZLE_NUMBER } from '../../const/puzzleNumber'
 import { Screen, screen } from '../../store/screen'
 import { fullPhrase } from '../../util/lottery/phrases'
+import { openTutorial } from '../../util/ui/openTutorial'
 
 export const Intro = () => {
   const setScreen = useSetAtom(screen)
@@ -22,12 +23,7 @@ export const Intro = () => {
         <Logo />
       </h2>
       <p className="mt-4 text-xl italic">Build words with every character in the alphabet.</p>
-      <button
-        className="btn btn-secondary btn-block mt-7"
-        onClick={() => {
-          ;(document.getElementById('tutorial') as HTMLDialogElement)?.showModal()
-        }}
-      >
+      <button className="btn btn-secondary btn-block mt-7" onClick={openTutorial}>
         How To Play
       </button>
       <button

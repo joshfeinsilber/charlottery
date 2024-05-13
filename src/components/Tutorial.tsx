@@ -1,3 +1,4 @@
+import { useEffect } from 'react'
 import { Letter } from './Letter'
 
 const ExampleQueue = () => {
@@ -13,7 +14,7 @@ const ExampleQueue = () => {
 export const Tutorial = () => {
   return (
     <dialog id="tutorial" className="modal">
-      <div className="modal-box max-h-[85%] w-11/12 max-w-screen-md p-10">
+      <div className="modal-box max-h-[85%] w-11/12 max-w-screen-md p-10" id="tutorial-content">
         <h3 className="text-2xl font-bold">Lottery of letters</h3>
         <p className="mt-1">
           In each puzzle, you'll be given a <b>shuffled</b> list of all 26 letters in the alphabet.
