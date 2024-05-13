@@ -1,11 +1,12 @@
 import { last, sample } from 'lodash'
-import { currentStartLetterIndex, currentWord } from '../../store/game'
+import { currentStartLetterIndex, currentWord, words } from '../../store/game'
 import { store } from '../../store/store'
 import { lettersForToday } from '../lottery/letters'
 import { getLettersWithPoints } from './getLettersWithPoints'
 import { toast } from 'sonner'
 import { SUCCESS_WORD_MESSAGES } from '../../const/messages'
 import { WORD_LIST } from '../../const/wordList'
+import { Screen, screen } from '../../store/screen'
 
 export const isWord = async (word: string) => {
   return WORD_LIST.has(word)
@@ -42,15 +43,17 @@ export const handleSubmit = async () => {
     return
   }
 
+  // Add to our list of words
+  store.set(words, [...store.get(words), word])
+
   const lastLetterIndex = letters.indexOf(lastLetterWithPoint)
   if (lastLetterIndex !== -1) {
     store.set(currentStartLetterIndex, lastLetterIndex + 1)
   }
 
   const nextLetter = letters[lastLetterIndex + 1]
-  console.log({ nextLetter })
   if (!nextLetter) {
-    // Game over
+    store.set(screen, Screen.results)
     return
   }
 

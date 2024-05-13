@@ -4,6 +4,7 @@ import { Header } from './header/App'
 import { screen as screenAtom, Screen } from '../store/screen'
 import { Intro } from '../screens/intro/App'
 import { Reveal } from '../screens/reveal/App'
+import { Results } from '../screens/results/App'
 
 const Layout = () => {
   const screen = useAtomValue(screenAtom)
@@ -16,6 +17,8 @@ const Layout = () => {
         return <Reveal />
       case Screen.game:
         return <Game />
+      case Screen.results:
+        return <Results />
       default:
         return <Intro />
     }

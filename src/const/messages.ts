@@ -24,3 +24,19 @@ export const SUCCESS_WORD_MESSAGES = [
   "Keep 'em coming.",
   "Don't stop now."
 ]
+
+export const GAME_OVER_MESSAGES = [
+  'Incredible!',
+  'Come on now!',
+  'Pure magic!',
+  'Genius!',
+  'Unbelievable!',
+  'Extraordinary!',
+  'Phenomenal!',
+  'Brilliant!',
+  'Spectacular!',
+  'Tremendous!',
+  'Top-notch.',
+  'Out of this world!',
+  'Mind-blowing!'
+]

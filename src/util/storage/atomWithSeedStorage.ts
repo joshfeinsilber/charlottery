@@ -6,9 +6,9 @@ const getKey = (key: string) => `${seed}-${key}`
 export const atomWithLocalStorage = <T = any>(key: string, initialValue: T) => {
   const getInitialValue = () => {
     const item = localStorage.getItem(getKey(key))
-    // if (item !== null) {
-    //   return JSON.parse(item)
-    // }
+    if (item !== null) {
+      return JSON.parse(item)
+    }
     return initialValue
   }
   const baseAtom = atom(getInitialValue())
