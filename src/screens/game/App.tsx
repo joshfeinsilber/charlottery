@@ -17,10 +17,14 @@ export const Game = () => {
   }
 
   return (
-    <div className="flex w-full flex-col items-center">
-      <Word />
+    <div className="flex w-full flex-1 flex-col items-center">
+      <div className="flex w-full flex-1 items-center justify-center">
+        <Word />
+      </div>
+
+      <div className="divider" />
       <LetterQueue />
-      <div className="mt-4 flex w-full justify-center">
+      <div className="mt-4 flex w-full items-end justify-center">
         <Keyboard onKeyPress={onKeyPress} />
       </div>
     </div>
