@@ -44,7 +44,7 @@ export const Keyboard = (props: Props) => {
               <Key
                 key={'key-' + (key.action.value ?? key.action.type)}
                 size={key.action.type !== IKeyActionType.letter ? 1.5 : 1}
-                className={key.className}
+                color={key.color}
                 onClick={() => {
                   props.onKeyPress?.(key.action)
                   // @ts-ignore
