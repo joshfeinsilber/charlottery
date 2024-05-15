@@ -8,6 +8,7 @@ import { useEffect, useState } from 'react'
 import { lettersForToday } from '../../util/lottery/letters'
 import { handleSubmit } from '../../util/game/handleSubmit'
 import { motion } from 'framer-motion'
+import { WordCount } from './WordCount'
 
 export const Game = () => {
   const [word, setWord] = useAtom(currentWord)
@@ -54,6 +55,8 @@ export const Game = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 0.5 }}
     >
+      <WordCount />
+
       <div className="flex w-full flex-1 items-center justify-center">
         <Word />
       </div>

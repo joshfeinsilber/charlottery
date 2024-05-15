@@ -3,10 +3,11 @@ import { PUZZLE_NUMBER } from '../../const/puzzleNumber'
 import { words } from '../../store/game'
 import { store } from '../../store/store'
 import { toast } from 'sonner'
+import { encodeResults } from './encodedInfo'
 
 const colors = ['🟦', '🟧', '🟪', '🟨', '🟩', '🟫', '⬜']
 
-const resultText = () => {
+export const resultText = () => {
   const wordsUsed = store.get(words)
 
   let text = `🎰 Charlottery No. ${PUZZLE_NUMBER}
@@ -36,14 +37,18 @@ const resultText = () => {
   return text
 }
 
-export const shareResult = () => {
+export const resultLinkText = (data: { words: string[]; letters: string[] }) => {
+  return `🔗 View my Charlottery No. ${PUZZLE_NUMBER} words: ${window.location.origin}?results=${encodeResults(data)}`
+}
+
+export const shareResult = (text: string) => {
   if (!navigator.share) {
     toast.success('Copied to clipboard!')
-    copy(resultText())
+    copy(text)
   } else {
     navigator.share({
       title: `Charlottery No. ${PUZZLE_NUMBER}`,
-      text: resultText()
+      text: text
     })
   }
 }

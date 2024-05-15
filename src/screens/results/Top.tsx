@@ -3,7 +3,7 @@ import { GAME_OVER_MESSAGES } from '../../const/messages'
 import { getRandomItemFromArray } from '../../util/lottery/seed'
 import { motion } from 'framer-motion'
 import { words } from '../../store/game'
-import { shareResult } from '../../util/results/share'
+import { resultText, shareResult } from '../../util/results/share'
 
 export const Top = () => {
   const wordsUsed = useAtomValue(words)
@@ -28,7 +28,12 @@ export const Top = () => {
         <p className="text-lg opacity-90">
           You completed today's puzzle in {wordsUsed.length} words.
         </p>
-        <button className="btn btn-primary btn-lg btn-block mt-4" onClick={shareResult}>
+        <button
+          className="btn btn-primary btn-lg btn-block mt-4"
+          onClick={() => {
+            shareResult(resultText())
+          }}
+        >
           Share
         </button>
       </div>
