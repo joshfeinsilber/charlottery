@@ -39,7 +39,7 @@ export const Words = (props: Props) => {
         <ul className="mt-3 flex flex-col gap-3 text-base">
           {props.words.map((word) => {
             return (
-              <div className="flex flex-wrap gap-2 text-lg">
+              <div key={word + randomKey} className="flex flex-wrap gap-2 text-lg">
                 {word.split('').map((letter, idx) => {
                   let point = false
                   if (props.letters[letterIndex] === letter) {

@@ -15,7 +15,10 @@ export const encodeResults = (data: { letters: string[]; words: string[] }) => {
 }
 
 export const decodeResults = (encoded: string) => {
-  const decoded = JSURL.parse<{ w: number[][]; l: string[] }>(decodeURIComponent(encoded))
+  const decoded = JSURL.tryParse<{ w: number[][]; l: string[] }>(decodeURIComponent(encoded))
+  if (!decoded) {
+    return undefined
+  }
 
   const words = decoded.w.map((word: number[]) => {
     return word

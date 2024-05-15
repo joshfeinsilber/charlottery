@@ -6,6 +6,7 @@ import { Intro } from '../screens/intro/App'
 import { Reveal } from '../screens/reveal/App'
 import { Results } from '../screens/results/App'
 import { Tutorial } from '../components/Tutorial'
+import { ResultWarning } from './ResultWarning'
 
 const Layout = () => {
   const screen = useAtomValue(screenAtom)
@@ -32,6 +33,7 @@ const Layout = () => {
         {getContent()}
         <Tutorial />
       </main>
+      <ResultWarning />
     </div>
   )
 }
