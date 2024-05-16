@@ -9,7 +9,7 @@ import { WORD_LIST } from '../../const/wordList'
 import { Screen, screen } from '../../store/screen'
 import { PUZZLE_NUMBER } from '../../const/puzzleNumber'
 
-export const isWord = async (word: string) => {
+export const isWord = (word: string) => {
   return WORD_LIST.has(word)
 }
 
@@ -27,7 +27,7 @@ export const handleSubmit = async () => {
     return
   }
 
-  const isValidWord = await isWord(word)
+  const isValidWord = isWord(word)
   if (!isValidWord) {
     toast.error('Not in word list')
     return
