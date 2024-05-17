@@ -39,18 +39,17 @@ export const getLetterIndexesWithPoints = (options: {
   currentWord: string
 }): Array<number> => {
   const lettersWithPoints = getLettersWithPoints(options)
+  let lettersWithPointsIndex = 0
 
-  const indexes: number[] = []
-  const usedLetters: string[] = []
+  const indexesWithPoints: number[] = []
 
   options.currentWord.split('').forEach((letter, index) => {
-    if (lettersWithPoints.includes(letter)) {
-      if (!usedLetters.includes(letter)) {
-        usedLetters.push(letter)
-        indexes.push(index)
-      }
+    const letterToMatch = lettersWithPoints[lettersWithPointsIndex]
+    if (letter === letterToMatch) {
+      indexesWithPoints.push(index)
+      lettersWithPointsIndex++
     }
   })
 
-  return indexes
+  return indexesWithPoints
 }

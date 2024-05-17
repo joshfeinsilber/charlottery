@@ -35,7 +35,10 @@ export const Game = () => {
 
   const onKeyPress = (action: IKeyAction) => {
     if (action.type === 'letter') {
-      setWord(word + action.value)
+      // Do not allow any words longer than 25 characters
+      if (word.length < 25) {
+        setWord(word + action.value)
+      }
     } else if (action.type === 'backspace') {
       // Always keep the start letter
       if (word.length <= 1) {

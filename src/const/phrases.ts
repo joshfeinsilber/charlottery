@@ -20,7 +20,8 @@ export const NAMES = [
   'Garlic Crush',
   'The White Fluffy Dog Down The Street',
   'Mid-Field Crisis',
-  'Domino'
+  'Domino',
+  'Captain Kirk'
 ]
 
 export const NOUNS = [
@@ -29,7 +30,7 @@ export const NOUNS = [
   'ACL',
   'Boba Tea',
   'Frog Toy',
-  'NYT Mini Crossword',
+  'NYT Mini Crossword', 
   'Knit Night',
   'Trivia Night',
   'Hot Tub Boats',
@@ -41,5 +42,11 @@ export const NOUNS = [
   'Pacific Rim',
   'Puppuccino',
   'Fried Chicken Sandwich',
-  'Chili'
+  'Chili',
+  'Chesting Of The Ball',
+  'Knitting Needle',
+  '3 Body Problem',
+  'Baked Goods',
+  'Brightcore',
+  'Brewing Company'
 ]
