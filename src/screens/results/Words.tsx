@@ -7,11 +7,7 @@ interface Props {
   letters: string[]
 }
 
-export const WordList = (props: {
-  words: string[]
-  letters: string[]
-  customSuccessClass?: string
-}) => {
+export const WordList = (props: { words: string[]; letters: string[]; darkMode?: boolean }) => {
   // Since we might get the same word multiple times as we re-use this list, we make a random key for React
   const randomKey = useMemo(() => {
     return Math.random().toString()
@@ -35,8 +31,9 @@ export const WordList = (props: {
                 <span
                   key={letter + idx + randomKey + word}
                   className={classNames({
-                    'text-green-700 underline': point,
-                    [`${props.customSuccessClass}`]: point
+                    underline: point,
+                    'text-green-700': point && !props.darkMode,
+                    'text-green-400': point && props.darkMode
                   })}
                 >
                   {letter.toUpperCase()}
