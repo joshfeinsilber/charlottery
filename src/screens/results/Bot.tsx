@@ -24,11 +24,7 @@ export const Bot = () => {
         {showSolution ? (
           <>
             <div className="mt-2">
-              <WordList
-                words={solution}
-                letters={lettersForToday()}
-                customSuccessClass="text-green-400"
-              />
+              <WordList words={solution} letters={lettersForToday()} darkMode={true} />
             </div>
             <p className="mt-6 text-sm italic opacity-90">{solution.length} words</p>
           </>
@@ -37,7 +33,7 @@ export const Bot = () => {
             onClick={() => {
               setShowSolution(true)
             }}
-            className="btn btn-primary btn-block mt-2"
+            className="btn-primar y btn btn-block mt-2"
           >
             View Perfect Solution
           </button>
