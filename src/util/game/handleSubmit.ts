@@ -5,12 +5,13 @@ import { lettersForToday } from '../lottery/letters'
 import { getLettersWithPoints } from './getLettersWithPoints'
 import { toast } from 'sonner'
 import { SUCCESS_WORD_MESSAGES } from '../../const/messages'
-import { WORD_LIST } from '../../const/wordList'
+import { wordsByStartingLetter } from '../../const/wordList'
 import { Screen, screen } from '../../store/screen'
 import { PUZZLE_NUMBER } from '../../const/puzzleNumber'
 
 export const isWord = (word: string) => {
-  return WORD_LIST.has(word)
+  const firstLetter = word[0]
+  return wordsByStartingLetter[firstLetter]?.includes(word)
 }
 
 export const handleSubmit = async () => {
