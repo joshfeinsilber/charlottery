@@ -1,4 +1,4 @@
- export const WORD_LIST: Set<string> = new Set([
+ export const WORD_LIST = [
   "aa",
   "aah",
   "aahed",
@@ -274925,4 +274925,13 @@
   "zyzzyvas",
   "zzz",
   "zzzs",
-])
+]
+
+export const wordsByStartingLetter = WORD_LIST.reduce<{ [key: string]: string[] }>((acc, word) => {
+  const firstLetter = word[0]
+  if (!acc[firstLetter]) {
+    acc[firstLetter] = []
+  }
+  acc[firstLetter].push(word)
+  return acc
+}, {})

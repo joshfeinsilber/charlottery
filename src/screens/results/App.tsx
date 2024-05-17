@@ -6,6 +6,7 @@ import { words } from '../../store/game'
 import { lettersForToday } from '../../util/lottery/letters'
 import { useMemo } from 'react'
 import { decodeResults } from '../../util/results/encodedInfo'
+import { Bot } from './Bot'
 
 export const Results = () => {
   const wordList = useAtomValue(words)
@@ -30,7 +31,8 @@ export const Results = () => {
       {otherResults ? (
         <Words title="Their Words" words={otherResults.words} letters={otherResults.letters} />
       ) : null}
-      <Words title="Your Words" words={wordList} letters={lettersForToday()} canShare={true} />
+      <Words title="Your Words" words={wordList} letters={lettersForToday()} />
+      <Bot />
     </motion.div>
   )
 }
