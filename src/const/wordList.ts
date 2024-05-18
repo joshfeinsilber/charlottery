@@ -274928,10 +274928,12 @@
 ]
 
 export const wordsByStartingLetter = WORD_LIST.reduce<{ [key: string]: string[] }>((acc, word) => {
-  const firstLetter = word[0]
-  if (!acc[firstLetter]) {
-    acc[firstLetter] = []
+  if (word.length >= 3) { // Only words 3+ letters long are valid
+    const firstLetter = word[0]
+    if (!acc[firstLetter]) {
+      acc[firstLetter] = []
+    }
+    acc[firstLetter].push(word)
   }
-  acc[firstLetter].push(word)
   return acc
 }, {})
