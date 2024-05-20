@@ -41,7 +41,7 @@ export const Bot = () => {
                   }}
                 />
                 <span className="label-text ml-2 text-sm italic text-white opacity-90">
-                  Only use words with 10 or fewer letters
+                  Only use words with 10 or fewer characters
                 </span>
               </label>
             </div>
