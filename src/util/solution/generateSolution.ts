@@ -18,7 +18,7 @@ class WordNode {
   }
 }
 
-const findWordsMatchingOrder = (letters: string[]) => {
+const findWordsMatchingOrder = (letters: string[], options?: { maxLettersPerWord?: number }) => {
   const startingLetter = letters[0]
 
   const matchingWords: Array<{ word: string; characterCount: number }> = []
@@ -41,6 +41,10 @@ const findWordsMatchingOrder = (letters: string[]) => {
 
     // Find one word that matches the critera. If we cannot find one, then there is no need to keep looking for longer words
     const matchingWord = wordsByStartingLetter[startingLetter].find((word) => {
+      if (options?.maxLettersPerWord && word.length > options.maxLettersPerWord) {
+        return false
+      }
+
       return regex.test(word)
     })
     if (!matchingWord) {
@@ -57,7 +61,7 @@ const findWordsMatchingOrder = (letters: string[]) => {
   return matchingWords
 }
 
-export const generateSolution = (letters: string[]) => {
+export const generateSolution = (letters: string[], options?: { maxLettersPerWord?: number }) => {
   // Create our root node which is an empty word at the start of the letters
   const root = new WordNode({
     word: '',
@@ -89,7 +93,7 @@ export const generateSolution = (letters: string[]) => {
     }
     visitedIndexes.add(startIndex)
 
-    const words = findWordsMatchingOrder(letters.slice(startIndex))
+    const words = findWordsMatchingOrder(letters.slice(startIndex), options)
 
     // For each word that matches the order, create a new node and add it to the queue
     for (const matchingWord of words) {
