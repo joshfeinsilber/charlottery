@@ -18,7 +18,7 @@ class WordNode {
   }
 }
 
-const findWordsMatchingOrder = (letters: string[], options?: { maxLettersPerWord?: number }) => {
+export const findWordsMatchingOrder = (letters: string[], options?: { maxLettersPerWord?: number }) => {
   const startingLetter = letters[0]
 
   const matchingWords: Array<{ word: string; characterCount: number }> = []
