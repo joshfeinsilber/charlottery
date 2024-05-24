@@ -28,8 +28,12 @@ ${medal.emoji} ${medal.name} Medal
 
     text += `
 `
-    word.split('').forEach(() => {
-      text += `${color}`
+    word.split('').forEach((letter, idx) => {
+      if (idx === 0) {
+        text += letter.toUpperCase()
+      } else {
+        text += `${color}`
+      }
     })
   })
 
