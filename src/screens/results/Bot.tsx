@@ -5,17 +5,13 @@ import { WordList } from './Words'
 
 export const Bot = () => {
   const [showSolution, setShowSolution] = useState(false)
-  const [letterLimit, setLetterLimit] = useState(-1)
 
   const solution = useMemo(() => {
     if (showSolution) {
-      return generateSolution(
-        lettersForToday(),
-        letterLimit > 0 ? { maxLettersPerWord: letterLimit } : undefined
-      )
+      return generateSolution(lettersForToday())
     }
     return []
-  }, [showSolution, letterLimit])
+  }, [showSolution])
 
   return (
     <div className="center card mt-4 w-full select-text bg-slate-700 text-white shadow-xl">
@@ -31,20 +27,6 @@ export const Bot = () => {
               <WordList words={solution} letters={lettersForToday()} darkMode={true} />
             </div>
             <p className="mt-6 text-sm italic opacity-90">{solution.length} words</p>
-            <div className="form-control">
-              <label className="label cursor-pointer">
-                <input
-                  type="checkbox"
-                  className="checkbox-warning checkbox"
-                  onChange={(event) => {
-                    setLetterLimit(event.target.checked ? 10 : -1)
-                  }}
-                />
-                <span className="label-text ml-2 text-sm italic text-white opacity-90">
-                  Only use words with 10 or fewer characters
-                </span>
-              </label>
-            </div>
           </>
         ) : (
           <button

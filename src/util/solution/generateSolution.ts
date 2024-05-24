@@ -18,7 +18,10 @@ class WordNode {
   }
 }
 
-export const findWordsMatchingOrder = (letters: string[], options?: { maxLettersPerWord?: number }) => {
+export const findWordsMatchingOrder = (
+  letters: string[],
+  options?: { maxLettersPerWord?: number }
+) => {
   const startingLetter = letters[0]
 
   const matchingWords: Array<{ word: string; characterCount: number }> = []
@@ -63,12 +66,10 @@ export const findWordsMatchingOrder = (letters: string[], options?: { maxLetters
 
 const solutionCache = new Map<string, string[]>()
 
-export const generateSolution = (letters: string[], options?: { maxLettersPerWord?: number }) => {
-  if (!options) {
-    const cacheKey = letters.join('')
-    if (solutionCache.has(cacheKey)) {
-      return solutionCache.get(cacheKey)!
-    }
+export const generateSolution = (letters: string[]) => {
+  const cacheKey = letters.join('')
+  if (solutionCache.has(cacheKey)) {
+    return solutionCache.get(cacheKey)!
   }
 
   // Create our root node which is an empty word at the start of the letters
@@ -102,7 +103,7 @@ export const generateSolution = (letters: string[], options?: { maxLettersPerWor
     }
     visitedIndexes.add(startIndex)
 
-    const words = findWordsMatchingOrder(letters.slice(startIndex), options)
+    const words = findWordsMatchingOrder(letters.slice(startIndex))
 
     // For each word that matches the order, create a new node and add it to the queue
     for (const matchingWord of words) {
@@ -118,9 +119,7 @@ export const generateSolution = (letters: string[], options?: { maxLettersPerWor
     }
   }
 
-  if (!options) {
-    solutionCache.set(letters.join(''), solution)
-  }
+  solutionCache.set(letters.join(''), solution)
 
   return solution
 }
