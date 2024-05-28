@@ -30,7 +30,10 @@ export const WordCount = () => {
       <p className={classNames({ 'text-green-700 underline': isProperWord })}>
         Word #{wordCount + 1}
       </p>
-      <div className="tooltip tooltip-left" data-tip={`The perfect solution's number of words`}>
+      <div
+        className="tooltip tooltip-left"
+        data-tip={`The number of words to complete the puzzle in to receive the perfection trophy`}
+      >
         <p>🏆 {solutionNumberOfWords}</p>
       </div>
     </div>

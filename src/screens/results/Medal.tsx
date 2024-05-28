@@ -1,15 +1,17 @@
-import { useMemo } from 'react'
+import { useMemo, useState } from 'react'
 import { MEDALS, NONE_MEDAL } from '../../const/medals'
 import { generateSolution } from '../../util/solution/generateSolution'
 import { lettersForToday } from '../../util/lottery/letters'
 import { getMedal } from '../../util/results/getMedal'
 import { useAtomValue } from 'jotai'
-import { words } from '../../store/game'
+import { resultHistory, words } from '../../store/game'
+import { MedalBreakdown } from './MedalBreakdown'
 
 export const Medal = () => {
   const wordList = useAtomValue(words)
-
+  const history = useAtomValue(resultHistory)
   const medal = getMedal(wordList.length)
+  const [showingBreakdown, setShowingBreakdown] = useState(false)
 
   const perfectSolutionWordCount = useMemo(() => {
     return generateSolution(lettersForToday()).length
@@ -37,6 +39,21 @@ export const Medal = () => {
             </p>
           </div>
         </div>
+        {showingBreakdown ? (
+          <>
+            <div className="divider" />
+            <MedalBreakdown />
+          </>
+        ) : history.length >= 3 ? (
+          <button
+            className="btn btn-primary btn-sm mt-4"
+            onClick={() => {
+              setShowingBreakdown(true)
+            }}
+          >
+            View Medal Statistics
+          </button>
+        ) : null}
       </div>
     </div>
   )

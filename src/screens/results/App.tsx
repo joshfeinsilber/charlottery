@@ -29,11 +29,18 @@ export const Results = () => {
       className="w-full max-w-xl"
     >
       <Top />
-      <Medal />
       {otherResults ? (
-        <Words title="Their Words" words={otherResults.words} letters={otherResults.letters} />
+        <>
+          <Words title="Their Words" words={otherResults.words} letters={otherResults.letters} />
+          <Words title="Your Words" words={wordList} letters={lettersForToday()} />
+        </>
       ) : null}
-      <Words title="Your Words" words={wordList} letters={lettersForToday()} />
+      <Medal />
+
+      {!otherResults ? (
+        <Words title="Your Words" words={wordList} letters={lettersForToday()} />
+      ) : null}
+
       <Bot />
     </motion.div>
   )
