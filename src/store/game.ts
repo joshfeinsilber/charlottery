@@ -16,7 +16,9 @@ export const words = atomWithSeedStorage('words', [] as string[])
 
 export const resultHistory = atomWithStorage<
   Array<{
+    seed: string
     puzzleNum: number
     wordsUsed: number
+    perfectSolutionWordsUsed: number
   }>
->('history', [])
+>('game-history', [], undefined, { getOnInit: true })

@@ -4,14 +4,17 @@ import { words } from '../../store/game'
 import { store } from '../../store/store'
 import { toast } from 'sonner'
 import { encodeResults } from './encodedInfo'
+import { getMedal } from './getMedal'
 
 const colors = ['🟦', '🟧', '🟪', '🟨', '🟩', '🟫', '⬜']
 
 export const resultText = () => {
   const wordsUsed = store.get(words)
+  const medal = getMedal(wordsUsed.length)
 
   let text = `🎰 Charlottery No. ${PUZZLE_NUMBER}
 ✅ Completed in ${wordsUsed.length} words
+${medal.emoji} ${medal.name} Medal
 `
 
   let colorIndex = 0

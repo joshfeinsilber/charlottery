@@ -8,6 +8,8 @@ import { SUCCESS_WORD_MESSAGES } from '../../const/messages'
 import { wordsByStartingLetter } from '../../const/wordList'
 import { Screen, screen } from '../../store/screen'
 import { PUZZLE_NUMBER } from '../../const/puzzleNumber'
+import { generateSolution } from '../solution/generateSolution'
+import { seed } from '../lottery/seed'
 
 export const isWord = (word: string) => {
   const firstLetter = word[0]
@@ -56,15 +58,19 @@ export const handleSubmit = async () => {
   }
 
   const nextLetter = letters[lastLetterIndex + 1]
+
   if (!nextLetter) {
     store.set(screen, Screen.results)
+
     // Push to our result history
     store.set(resultHistory, (prev) => {
       return [
         ...prev,
         {
           puzzleNum: PUZZLE_NUMBER,
-          wordsUsed: store.get(words).length
+          seed,
+          wordsUsed: store.get(words).length,
+          perfectSolutionWordsUsed: generateSolution(letters).length
         }
       ]
     })

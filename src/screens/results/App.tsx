@@ -7,6 +7,7 @@ import { lettersForToday } from '../../util/lottery/letters'
 import { useMemo } from 'react'
 import { decodeResults } from '../../util/results/encodedInfo'
 import { Bot } from './Bot'
+import { Medal } from './Medal'
 
 export const Results = () => {
   const wordList = useAtomValue(words)
@@ -28,6 +29,7 @@ export const Results = () => {
       className="w-full max-w-xl"
     >
       <Top />
+      <Medal />
       {otherResults ? (
         <Words title="Their Words" words={otherResults.words} letters={otherResults.letters} />
       ) : null}

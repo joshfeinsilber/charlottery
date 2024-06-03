@@ -61,7 +61,16 @@ const findWordsMatchingOrder = (letters: string[], options?: { maxLettersPerWord
   return matchingWords
 }
 
+const solutionCache = new Map<string, string[]>()
+
 export const generateSolution = (letters: string[], options?: { maxLettersPerWord?: number }) => {
+  if (!options) {
+    const cacheKey = letters.join('')
+    if (solutionCache.has(cacheKey)) {
+      return solutionCache.get(cacheKey)!
+    }
+  }
+
   // Create our root node which is an empty word at the start of the letters
   const root = new WordNode({
     word: '',
@@ -107,6 +116,10 @@ export const generateSolution = (letters: string[], options?: { maxLettersPerWor
       node.children.push(child)
       queue.push(child)
     }
+  }
+
+  if (!options) {
+    solutionCache.set(letters.join(''), solution)
   }
 
   return solution
