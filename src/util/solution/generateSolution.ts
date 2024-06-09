@@ -50,8 +50,29 @@ export const findWordsMatchingOrder = (
 
       return regex.test(word)
     })
+
     if (!matchingWord) {
-      break
+      // If there is no matching word, we need to look for one more edge case.
+      // The first regex blocks the next letter from being used. But there is a chance that there is a sequence where all valid words use the current and next letter. This checks for that
+      const futureMatchRegex = new RegExp('^' + lettersToCheck.join('.*'))
+      const hasFutureMatchingWord = wordsByStartingLetter[startingLetter].find((word) => {
+        if (options?.maxLettersPerWord && word.length > options.maxLettersPerWord) {
+          return false
+        }
+        return futureMatchRegex.test(word)
+      })
+        ? true
+        : false
+
+      // If we have a future matching word, then we can keep looking for longer words
+      if (hasFutureMatchingWord) {
+        continue
+      }
+
+      // Otherwise, there are no more solutions and we found the longest word we can possibly make
+      else {
+        break
+      }
     }
 
     // Add the word to the list of matching words along with the number of characters with points it has
