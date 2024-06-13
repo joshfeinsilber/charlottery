@@ -4,28 +4,50 @@ import { lettersForToday } from '../../util/lottery/letters'
 import { currentStartLetterIndex, currentWord } from '../../store/game'
 import { getLettersWithPoints } from '../../util/game/getLettersWithPoints'
 import { AnimatePresence, motion } from 'framer-motion'
-import { useMemo } from 'react'
+import { useEffect, useMemo, useState } from 'react'
 import { findWordsMatchingOrder } from '../../util/solution/generateSolution'
 
 export const LetterQueue = () => {
   const word = useAtomValue(currentWord)
-  const startLetterIndex = useAtomValue(currentStartLetterIndex)
-  const letters = lettersForToday()
+  const storeStartLetterIndex = useAtomValue(currentStartLetterIndex)
+  const [startLetterIndex, setStartLetterIndex] = useState(storeStartLetterIndex)
+  const letters = useMemo(() => lettersForToday(), [])
 
   const numberOfCharactersInQueueThatCanBeUsed = useMemo(() => {
     const words = findWordsMatchingOrder([...letters].splice(startLetterIndex))
     return words.length
   }, [letters.length, startLetterIndex])
 
-  const lettersWithPoints = getLettersWithPoints({
-    letters,
-    currentStartLetterIndex: startLetterIndex,
-    currentWord: word
-  })
+  const lettersWithPoints = useMemo(
+    () =>
+      getLettersWithPoints({
+        letters,
+        currentStartLetterIndex: storeStartLetterIndex,
+        currentWord: word
+      }),
+    [letters, storeStartLetterIndex, word]
+  )
 
-  const filteredLetters = letters.filter((_, idx) => {
-    return idx >= startLetterIndex
-  })
+  const possibleLetters = useMemo(() => {
+    const start = startLetterIndex
+    const end = start + numberOfCharactersInQueueThatCanBeUsed
+
+    return letters.filter((_, idx) => {
+      return idx >= start && idx < end
+    })
+  }, [letters, numberOfCharactersInQueueThatCanBeUsed, startLetterIndex])
+
+  const filteredLetters = useMemo(
+    () =>
+      letters.filter((_, idx) => {
+        return idx >= storeStartLetterIndex
+      }),
+    [letters, storeStartLetterIndex]
+  )
+
+  useEffect(() => {
+    setStartLetterIndex(storeStartLetterIndex)
+  }, [storeStartLetterIndex])
 
   return (
     <AnimatePresence>
@@ -36,6 +58,10 @@ export const LetterQueue = () => {
               layout
               className="flex shrink-0 flex-col items-center"
               key={'queue' + letter + startLetterIndex}
+              style={{ cursor: 'pointer' }}
+              onClick={() => {
+                setStartLetterIndex(storeStartLetterIndex + idx)
+              }}
             >
               <Letter
                 size={50}
@@ -43,7 +69,7 @@ export const LetterQueue = () => {
                 status={
                   lettersWithPoints.includes(letter)
                     ? ILetterStatus.point
-                    : idx < numberOfCharactersInQueueThatCanBeUsed
+                    : possibleLetters.includes(letter)
                       ? ILetterStatus.possible
                       : ILetterStatus.default
                 }
