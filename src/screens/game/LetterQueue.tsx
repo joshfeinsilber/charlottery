@@ -6,6 +6,7 @@ import { getLettersWithPoints } from '../../util/game/getLettersWithPoints'
 import { AnimatePresence, motion } from 'framer-motion'
 import { useEffect, useMemo, useState } from 'react'
 import { findWordsMatchingOrder } from '../../util/solution/generateSolution'
+import { last } from 'lodash'
 
 export const LetterQueue = () => {
   const word = useAtomValue(currentWord)
@@ -15,7 +16,7 @@ export const LetterQueue = () => {
 
   const numberOfCharactersInQueueThatCanBeUsed = useMemo(() => {
     const words = findWordsMatchingOrder([...letters].splice(startLetterIndex))
-    return words.length
+    return last(words)?.characterCount ?? 1
   }, [letters.length, startLetterIndex])
 
   const lettersWithPoints = useMemo(
@@ -70,7 +71,9 @@ export const LetterQueue = () => {
                   lettersWithPoints.includes(letter)
                     ? ILetterStatus.point
                     : possibleLetters.includes(letter)
-                      ? ILetterStatus.possible
+                      ? startLetterIndex !== storeStartLetterIndex
+                        ? ILetterStatus.possibleDark
+                        : ILetterStatus.possible
                       : ILetterStatus.default
                 }
               />

@@ -4,7 +4,8 @@ import { motion } from 'framer-motion'
 export enum ILetterStatus {
   default = 'default',
   point = 'point',
-  possible = 'possible'
+  possible = 'possible',
+  possibleDark = 'possibleDark'
 }
 
 interface Props {
@@ -29,8 +30,11 @@ export const Letter = (props: Props) => {
           {
             'border-gray-400': status === ILetterStatus.default,
             'border-green-600': status === ILetterStatus.point,
-            'border-blue-400': status === ILetterStatus.possible,
+            'border-blue-400':
+              status === ILetterStatus.possible || status === ILetterStatus.possibleDark,
             'bg-white': status === ILetterStatus.default || status === ILetterStatus.possible,
+            'bg-slate-700': status === ILetterStatus.possibleDark,
+            'text-white': status === ILetterStatus.possibleDark,
             'bg-green-100': status === ILetterStatus.point
           }
         )}
